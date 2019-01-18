@@ -5,6 +5,8 @@ public class EndPointContext {
     public static final String BASE_URI = "http://stg.api.fawasell.com/v1/";
     public static final int APP_ID = 14378174;
     public static final String APP_SECRET = "cFJiGxZVTGf3rPNMK1o08WQWWpnr8M9RmZOyGxcM";
+    public static final String HASH_KEY = "diBIGrtVCAH00GtMVLupirbNdFEjooqk8YPJUtUw";
+    public static final String DATA = "data";
 
     public static class Category{
         public static final String SEGMENT = "categories";

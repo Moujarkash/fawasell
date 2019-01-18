@@ -2,6 +2,8 @@ package com.project.mod.fawasell.repositories.base;
 
 import android.util.Log;
 
+import com.project.mod.fawasell.base.EndPointContext;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -18,7 +20,6 @@ public abstract class BaseRepository {
     protected String getSignature(Object... values){
         String signature = null;
         String md5 = "MD5";
-        byte[] bytes;
         try{
             if(values == null) return null;
 
@@ -30,6 +31,8 @@ public abstract class BaseRepository {
                     digest.update(value.toString().getBytes());
                 }
             }
+
+            digest.update(EndPointContext.HASH_KEY.getBytes());
 
             byte messageDigest[] = digest.digest();
 

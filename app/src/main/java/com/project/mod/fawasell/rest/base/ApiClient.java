@@ -23,9 +23,8 @@ public class ApiClient {
     public static Retrofit getClient(){
 
         Gson gson = new GsonBuilder()
-                .setLenient()
                 .registerTypeAdapter(Date.class, new DateDeserializer())
-                .setDateFormat("MM/dd/yyyy")
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
 
         if(mRetrofit == null){

@@ -22,7 +22,7 @@ public class DateDeserializer implements JsonDeserializer<Date> {
         String dateString = element.getAsString();
         Long dateLong = Long.parseLong(dateString);
 
-        return new Date(dateLong);
+        return new Date(dateLong * 1000);
     }
 
     //endregion
