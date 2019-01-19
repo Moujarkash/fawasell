@@ -1,16 +1,16 @@
 package com.project.mod.fawasell.presenters.base;
 
-public abstract class BasePresenter {
+public abstract class BasePresenter<T extends View> {
 
     //region Variables
 
-    protected View mView;
+    protected T mView;
 
     //endregion
 
     //region Constructor
 
-    public BasePresenter(View view){
+    public BasePresenter(T view){
         mView = view;
     }
 
