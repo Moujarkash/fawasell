@@ -25,18 +25,21 @@ public class CategoriesPresenter extends BasePresenter<CategoriesView> {
 
     public void getCategories(){
         mView.displayLoadView();
+        mView.removeRetryView();
 
         mCategoryRepository.getCategories(new CallBack() {
 
             @Override
             public void onResponse(Object response) {
                 mView.removeLoadView();
+                mView.removeRetryView();
                 mView.updateOnFetchCategories((CategoryList) response);
             }
 
             @Override
             public void onFailure(String errorMessage) {
                 mView.removeLoadView();
+                mView.displayRetryView();
                 mView.displayErrorMessageDialog(errorMessage);
             }
         });

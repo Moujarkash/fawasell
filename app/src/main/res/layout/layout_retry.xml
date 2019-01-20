@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/layout_retry_image_view"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/ic_retry"
+        android:tint="@color/colorAccent"
+        android:layout_centerInParent="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/retry"/>
+
+    <TextView
+        android:id="@+id/layout_retry_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/retry"
+        android:textSize="18sp"
+        android:layout_above="@id/layout_retry_image_view"
+        android:layout_marginBottom="8dp"/>
+
+</RelativeLayout>

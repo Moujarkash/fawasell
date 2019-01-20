@@ -25,18 +25,21 @@ public class PostsPresenter extends BasePresenter<PostsView> {
 
     public void getPosts(int page, int limit){
         mView.displayLoadView();
+        mView.removeRetryView();
 
         mPostRepository.getPosts(mView.getCategoryId(), page, limit, new CallBack() {
 
             @Override
             public void onResponse(Object response) {
                 mView.removeLoadView();
+                mView.removeRetryView();
                 mView.updateOnFetchPosts((PostList) response);
             }
 
             @Override
             public void onFailure(String errorMessage) {
                 mView.removeLoadView();
+                mView.displayRetryView();
                 mView.displayErrorMessageDialog(errorMessage);
             }
         });

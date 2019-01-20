@@ -6,5 +6,9 @@ public interface View {
 
     void removeLoadView();
 
+    void displayRetryView();
+
+    void removeRetryView();
+
     void displayErrorMessageDialog(String errorMessage);
 }
