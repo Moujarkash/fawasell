@@ -1,10 +1,20 @@
 package com.project.mod.fawasell.presenters.post;
 
-import com.project.mod.fawasell.models.post.PostList;
+import android.content.Context;
+import android.util.Log;
+
+import com.project.mod.fawasell.R;
+import com.project.mod.fawasell.models.post.PostResponse;
 import com.project.mod.fawasell.presenters.base.BasePresenter;
 import com.project.mod.fawasell.repositories.PostRepository;
 
 public class PostsPresenter extends BasePresenter<PostsView> {
+
+    //region Constants
+
+    private static final String TAG = PostsPresenter.class.getSimpleName();
+
+    //endregion
 
     //region Variables
 
@@ -23,9 +33,11 @@ public class PostsPresenter extends BasePresenter<PostsView> {
 
     //region Members
 
-    public void getPosts(int page, int limit){
+    public void getPosts(final Context context, int page, int limit){
         mView.displayLoadView();
         mView.removeRetryView();
+
+        if(!checkInternetConnection(context)) return;
 
         mPostRepository.getPosts(mView.getCategoryId(), page, limit, new CallBack() {
 
@@ -33,14 +45,15 @@ public class PostsPresenter extends BasePresenter<PostsView> {
             public void onResponse(Object response) {
                 mView.removeLoadView();
                 mView.removeRetryView();
-                mView.updateOnFetchPosts((PostList) response);
+                mView.updateOnFetchPosts((PostResponse) response);
             }
 
             @Override
             public void onFailure(String errorMessage) {
                 mView.removeLoadView();
                 mView.displayRetryView();
-                mView.displayErrorMessageDialog(errorMessage);
+                mView.displayErrorMessageDialog(context.getString(R.string.something_wrong_happened));
+                Log.e(TAG, errorMessage);
             }
         });
     }

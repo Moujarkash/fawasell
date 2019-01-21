@@ -7,21 +7,23 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.project.mod.fawasell.R;
+
 public class DisplayHelper {
 
     //region Public Members
 
     public static void displayMessageAlertDialog(Context context, String title, String message) {
         AlertDialog.Builder builder;
-        builder = new AlertDialog.Builder(context);
+        builder = new AlertDialog.Builder(context, R.style.AlertDialogCustom);
 
         builder.setTitle(title)
                 .setMessage(message)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.ic_error)
                 .show();
     }
 

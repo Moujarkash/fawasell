@@ -5,7 +5,7 @@ import com.project.mod.fawasell.base.EndPointContext;
 
 import java.util.List;
 
-public class CategoryList {
+public class CategoryResponse {
 
     //region Variables
 
@@ -16,7 +16,7 @@ public class CategoryList {
 
     //region Constructor
 
-    public CategoryList(){}
+    public CategoryResponse(){}
 
     //endregion
 

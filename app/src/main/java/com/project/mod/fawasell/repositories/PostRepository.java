@@ -3,7 +3,7 @@ package com.project.mod.fawasell.repositories;
 import android.util.Log;
 
 import com.project.mod.fawasell.base.EndPointContext;
-import com.project.mod.fawasell.models.post.PostList;
+import com.project.mod.fawasell.models.post.PostResponse;
 import com.project.mod.fawasell.presenters.base.BasePresenter.CallBack;
 import com.project.mod.fawasell.repositories.base.BaseRepository;
 import com.project.mod.fawasell.rest.PostRest;
@@ -41,16 +41,16 @@ public class PostRepository extends BaseRepository {
 
         String signature = getSignature(categoryId, page, limit, EndPointContext.APP_ID, EndPointContext.APP_SECRET);
 
-        Call<PostList> call = mPostRest.getPosts(categoryId, page, limit, EndPointContext.APP_ID, EndPointContext.APP_SECRET, signature);
-        call.enqueue(new Callback<PostList>() {
+        Call<PostResponse> call = mPostRest.getPosts(categoryId, page, limit, EndPointContext.APP_ID, EndPointContext.APP_SECRET, signature);
+        call.enqueue(new Callback<PostResponse>() {
 
             @Override
-            public void onResponse(Call<PostList> call, Response<PostList> response) {
+            public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
                 callBack.onResponse(response.body());
             }
 
             @Override
-            public void onFailure(Call<PostList> call, Throwable t) {
+            public void onFailure(Call<PostResponse> call, Throwable t) {
                 callBack.onFailure(t.getMessage());
                 Log.e(TAG, t.getMessage(), t);
             }

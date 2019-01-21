@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.project.mod.fawasell.R;
 import com.project.mod.fawasell.models.category.Category;
-import com.project.mod.fawasell.models.category.CategoryList;
+import com.project.mod.fawasell.models.category.CategoryResponse;
 import com.project.mod.fawasell.presenters.category.CategoriesPresenter;
 import com.project.mod.fawasell.presenters.category.CategoriesView;
 import com.project.mod.fawasell.ui.adapters.CategoryAdapter;
@@ -26,7 +26,9 @@ import com.project.mod.fawasell.ui.viewholders.CategoryViewHolder;
 
 import java.util.List;
 
-public class CategoriesFragment extends Fragment implements CategoriesView, CategoryViewHolder.OnCategoryClickListener {
+import androidx.navigation.fragment.NavHostFragment;
+
+public class CategoriesFragment extends BaseFragment implements CategoriesView, CategoryViewHolder.OnCategoryClickListener {
 
     //region Variables
 
@@ -36,7 +38,6 @@ public class CategoriesFragment extends Fragment implements CategoriesView, Cate
     private ImageView mRetryImageView;
 
     private CategoriesPresenter mCategoriesPresenter;
-    private OnFragmentInteractionListener mOnFragmentInteractionListener;
 
     //endregion
 
@@ -56,18 +57,10 @@ public class CategoriesFragment extends Fragment implements CategoriesView, Cate
 
         bindViews(view);
         attachListener();
-        setActionBarTitle();
-        mCategoriesPresenter.getCategories();
+        setActionBarTitle(getString(R.string.category_title));
+        mCategoriesPresenter.getCategories(getContext());
 
         return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        if(context instanceof OnFragmentInteractionListener)
-            mOnFragmentInteractionListener = (OnFragmentInteractionListener) context;
     }
 
     //endregion
@@ -79,12 +72,6 @@ public class CategoriesFragment extends Fragment implements CategoriesView, Cate
         mLoadView = view.findViewById(R.id.fragment_category_load_view);
         mRetryView = view.findViewById(R.id.fragment_category_retry_view);
         mRetryImageView = view.findViewById(R.id.layout_retry_image_view);
-    }
-
-    private void setActionBarTitle(){
-        if (mOnFragmentInteractionListener != null) {
-            mOnFragmentInteractionListener.onFragmentInteraction(getString(R.string.category_title));
-        }
     }
 
     private void initRecyclerView(List<Category> categories){
@@ -104,7 +91,7 @@ public class CategoriesFragment extends Fragment implements CategoriesView, Cate
 
             @Override
             public void onClick(View v) {
-                mCategoriesPresenter.getCategories();
+                mCategoriesPresenter.getCategories(getContext());
             }
         });
     }
@@ -114,8 +101,8 @@ public class CategoriesFragment extends Fragment implements CategoriesView, Cate
     //region CategoriesView
 
     @Override
-    public void updateOnFetchCategories(CategoryList categoryList) {
-        initRecyclerView(categoryList.getCategories());
+    public void updateOnFetchCategories(CategoryResponse categoryResponse) {
+        initRecyclerView(categoryResponse.getCategories());
     }
 
     @Override
@@ -150,16 +137,10 @@ public class CategoriesFragment extends Fragment implements CategoriesView, Cate
 
     @Override
     public void onCategoryClick(Category category) {
+        Bundle args = new Bundle();
+        args.putInt(PostsFragment.CATEGORY_ID_ARG, category.getId());
 
-    }
-
-    //endregion
-
-    //region OnFragmentInteractionListener
-
-    public interface OnFragmentInteractionListener {
-
-         void onFragmentInteraction(String title);
+        NavHostFragment.findNavController(this).navigate(R.id.postsFragment, args);
     }
 
     //endregion

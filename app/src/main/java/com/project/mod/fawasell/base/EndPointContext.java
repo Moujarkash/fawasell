@@ -7,6 +7,7 @@ public class EndPointContext {
     public static final String APP_SECRET = "cFJiGxZVTGf3rPNMK1o08WQWWpnr8M9RmZOyGxcM";
     public static final String HASH_KEY = "diBIGrtVCAH00GtMVLupirbNdFEjooqk8YPJUtUw";
     public static final String DATA = "data";
+    public static final String META = "meta";
 
     public static class Category{
         public static final String SEGMENT = "categories";
@@ -66,6 +67,9 @@ public class EndPointContext {
             public static final String COMMENT_COUNT = "comment_count";
             public static final String RANKING_SCORE = "ranking_score";
             public static final String CREATED_AT = "created_at";
+            public static final String PAGE = "page";
+            public static final String PAGES = "pages";
+            public static final String SHOWING = "showing";
         }
     }
 

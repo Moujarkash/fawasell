@@ -7,5 +7,8 @@
     <string name="category_title">التصنيفات</string>
     <string name="error_dialog_title">خطأ</string>
     <string name="retry">اعادة المحاولة</string>
-
+    <string name="ok">حسنا</string>
+    <string name="something_wrong_happened">لقد حدث خطأ! الرجاء اعادة المحاولة</string>
+    <string name="please_check_your_internet_connection">الرجاء التأكد من الاتصال بالانترنت</string>
+    <string name="post_title">المشاركات</string>
 </resources>

@@ -3,7 +3,7 @@ package com.project.mod.fawasell.repositories;
 import android.util.Log;
 
 import com.project.mod.fawasell.base.EndPointContext;
-import com.project.mod.fawasell.models.category.CategoryList;
+import com.project.mod.fawasell.models.category.CategoryResponse;
 import com.project.mod.fawasell.presenters.base.BasePresenter.CallBack;
 import com.project.mod.fawasell.repositories.base.BaseRepository;
 import com.project.mod.fawasell.rest.CategoryRest;
@@ -41,16 +41,16 @@ public class CategoryRepository extends BaseRepository {
 
         String signature = getSignature(EndPointContext.APP_ID, EndPointContext.APP_SECRET);
 
-        Call<CategoryList> call = mCategoryRest.getCategories(EndPointContext.APP_ID, EndPointContext.APP_SECRET, signature);
-        call.enqueue(new Callback<CategoryList>() {
+        Call<CategoryResponse> call = mCategoryRest.getCategories(EndPointContext.APP_ID, EndPointContext.APP_SECRET, signature);
+        call.enqueue(new Callback<CategoryResponse>() {
 
             @Override
-            public void onResponse(Call<CategoryList> call, Response<CategoryList> response) {
+            public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 callBack.onResponse(response.body());
             }
 
             @Override
-            public void onFailure(Call<CategoryList> call, Throwable t) {
+            public void onFailure(Call<CategoryResponse> call, Throwable t) {
                 callBack.onFailure(t.getMessage());
                 Log.e(TAG, t.getMessage(), t);
             }

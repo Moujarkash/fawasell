@@ -5,18 +5,21 @@ import com.project.mod.fawasell.base.EndPointContext;
 
 import java.util.List;
 
-public class PostList {
+public class PostResponse {
 
     //region Variables
 
     @SerializedName(EndPointContext.DATA)
     private List<Post> mPosts;
 
+    @SerializedName(EndPointContext.META)
+    private PostMetaData mPostMetaData;
+
     //endregion
 
     //region Constructor
 
-    public PostList(){}
+    public PostResponse(){}
 
     //endregion
 
@@ -28,6 +31,14 @@ public class PostList {
 
     public void setPosts(List<Post> posts) {
         mPosts = posts;
+    }
+
+    public PostMetaData getPostMetaData() {
+        return mPostMetaData;
+    }
+
+    public void setPostMetaData(PostMetaData postMetaData) {
+        mPostMetaData = postMetaData;
     }
 
     //endregion
