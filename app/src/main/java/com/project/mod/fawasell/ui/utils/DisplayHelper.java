@@ -41,5 +41,26 @@ public class DisplayHelper {
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
+    public static String getNumberUnitFormat(double number){
+        String numberString = null;
+        do {
+            if(number < 1000){
+                numberString = String.valueOf(number);
+                break;
+            }
+
+            if(number > 1000 && number < 1000000){
+                numberString = String.valueOf((int) Math.floor(number / 1000)) + "K";
+                break;
+            }
+
+            if(number > 1000000){
+                numberString = String.valueOf((int) Math.floor(number / 1000000)) + "M";
+                break;
+            }
+        }while (false);
+        return numberString;
+    }
+
     //endregion
 }

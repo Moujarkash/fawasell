@@ -11,4 +11,5 @@
     <string name="something_wrong_happened">لقد حدث خطأ! الرجاء اعادة المحاولة</string>
     <string name="please_check_your_internet_connection">الرجاء التأكد من الاتصال بالانترنت</string>
     <string name="post_title">المشاركات</string>
+    <string name="post_image">Post Image</string>
 </resources>
