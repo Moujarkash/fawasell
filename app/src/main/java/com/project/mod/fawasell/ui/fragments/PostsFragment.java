@@ -40,6 +40,7 @@ public class PostsFragment extends BaseFragment implements PostsView {
 
     private PostsPresenter mPostsPresenter;
     private PostAdapter mPostAdapter;
+    LinearLayoutManager mLayoutManager;
     private int mCategoryId = 0;
     private int mCurrentPage = 1;
     private int mTotalPages = 0;
@@ -96,11 +97,13 @@ public class PostsFragment extends BaseFragment implements PostsView {
         if(posts == null) return;
 
         mPostAdapter = new PostAdapter(posts);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
-        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mPostAdapter);
+
+        mRecyclerView.addOnScrollListener(recyclerViewOnScrollListener);
     }
 
     private void loadNextPosts(){
@@ -152,8 +155,36 @@ public class PostsFragment extends BaseFragment implements PostsView {
 
     @Override
     public void displayErrorMessageDialog(String errorMessage) {
-        DisplayHelper.displayMessageAlertDialog(getContext(), getString(R.string.error_dialog_title), errorMessage);
+        if (mCurrentPage == 1)
+            DisplayHelper.displayMessageAlertDialog(getContext(), getString(R.string.error_dialog_title), errorMessage);
     }
+
+    //endregion
+
+    //region RecyclerView.OnScrollListener
+
+    private RecyclerView.OnScrollListener recyclerViewOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            int visibleItemCount = mLayoutManager.getChildCount();
+            int totalItemCount = mLayoutManager.getItemCount();
+            int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
+
+            if (mCurrentPage != mTotalPages) {
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                        && firstVisibleItemPosition >= 0
+                        && totalItemCount >= LIMIT) {
+                    loadNextPosts();
+                }
+            }
+        }
+    };
 
     //endregion
 }
